@@ -44,3 +44,7 @@ next-env.d.ts
 !.dev.vars.example
 .env*
 !.env.example
+
+# nested standalone repo (pushed separately to vbarter/seeworld)
+/seeworld
+

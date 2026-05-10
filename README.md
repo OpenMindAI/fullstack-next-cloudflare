@@ -97,6 +97,47 @@ src/
 - **Type Safety** - End-to-end TypeScript from database to UI
 - **Testable** - Clear separation of concerns makes testing easier
 
+## 🧬 Use as Template
+
+This repo is a **GitHub Template Repository**. Click **Use this template** on the repo home page to spin up a new project that inherits the full Next.js + Cloudflare Workers + D1 + R2 + Vectorize stack — without any fork relationship.
+
+### After creating the new repo
+
+1. **Clone it locally and install deps**
+   ```bash
+   git clone git@github.com:<you>/<new-app>.git && cd <new-app>
+   pnpm install
+   ```
+
+2. **Rename Cloudflare resources** in `wrangler.jsonc`:
+   - `name` — app name shown in the Cloudflare dashboard
+   - `d1_databases[0].database_name` + `database_id` — create with `wrangler d1 create <name>`
+   - `r2_buckets[0].bucket_name` + `preview_bucket_name` + `binding` — create with `wrangler r2 bucket create <name>`
+   - `vectorize[0].index_name` — create with `wrangler vectorize create <name> --dimensions=<n> --metric=<metric>`
+
+3. **Regenerate Cloudflare types**
+   ```bash
+   pnpm cf-typegen
+   ```
+
+4. **Configure GitHub Secrets** (Settings → Secrets and variables → Actions) so the deploy workflow can run:
+   `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `BETTER_AUTH_SECRET`,
+   `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `CLOUDFLARE_R2_URL`
+
+5. **(Optional) Keep an upstream link to receive future template improvements**
+   ```bash
+   git remote add template git@github.com:OpenMindAI/fullstack-next-cloudflare.git
+   git fetch template
+   # Later, cherry-pick a single improvement:
+   git cherry-pick <commit-from-template>
+   # Or merge a batch (expect conflicts on first merge):
+   git merge template/main --allow-unrelated-histories
+   ```
+
+### Derived projects
+
+- [vbarter/seeworld](https://github.com/vbarter/seeworld) — first project derived from this template
+
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
